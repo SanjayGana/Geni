@@ -201,7 +201,7 @@ void Router::processReceivedMsg()
 
 			struct timeval recvtime;
 			gettimeofday(&recvtime, NULL);
-			long long int rtt = recvtime.tv_sec*1000 + recvtime.tv_usec/1000 - send_time[dstid];
+			long long int rtt = recvtime.tv_sec*1000000 + recvtime.tv_usec - send_time[dstid];
 			LSAinfo[id][dstid] = rtt;
 		}
 		else if(recv_data[0] == 'L')
@@ -283,7 +283,7 @@ void sendHello(void *arg)
 				(struct sockaddr *) &server_addr, sizeof (struct sockaddr));
 		struct timeval sendtime;
 		gettimeofday(&sendtime,NULL);
-		r->send_time[r->neighbours[i].j] = sendtime.tv_sec*1000 + sendtime.tv_usec/1000;
+		r->send_time[r->neighbours[i].j] = sendtime.tv_sec*1000000 + sendtime.tv_usec;
 
 	}
 }
@@ -501,8 +501,8 @@ int main(int argc,char *argv[])
 	int port = 20027;
 	
 	host = (struct hostent *) gethostbyname((char*)(getHostFromId(r->id).c_str()));
-	server_addr.sin_addr = *((struct in_addr *) host->h_addr);
-    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+	server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port);
     bzero(&(server_addr.sin_zero), 8);
 
