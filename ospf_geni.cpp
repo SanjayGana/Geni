@@ -273,21 +273,18 @@ void sendHello(void *arg)
 	sprintf(charid,"%d",r->id);
 	strcat(hello_packet,charid);
 
-	while( true )
+	int i;
+
+	for( i = 0 ; i < r->neighbours.size() ; i++)
 	{
-		int i;
+		host = (struct hostent *) gethostbyname((char*)(getHostFromId(r->neighbours[i].j).c_str()));
+		server_addr.sin_addr = *((struct in_addr *) host->h_addr);
+		sendto(sock, hello_packet , strlen(hello_packet), 0,
+				(struct sockaddr *) &server_addr, sizeof (struct sockaddr));
+		struct timeval sendtime;
+		gettimeofday(&sendtime,NULL);
+		r->send_time[r->neighbours[i].j] = sendtime.tv_sec*1000 + sendtime.tv_usec/1000;
 
-		for( i = 0 ; i < r->neighbours.size() ; i++)
-		{
-			host = (struct hostent *) gethostbyname((char*)(getHostFromId(r->neighbours[i].j).c_str()));
-			server_addr.sin_addr = *((struct in_addr *) host->h_addr);
-			sendto(sock, hello_packet , strlen(hello_packet), 0,
-					(struct sockaddr *) &server_addr, sizeof (struct sockaddr));
-			struct timeval sendtime;
-			gettimeofday(&sendtime,NULL);
-			r->send_time[r->neighbours[i].j] = sendtime.tv_sec*1000 + sendtime.tv_usec/1000;
-
-		}
 	}
 }
 
@@ -408,7 +405,6 @@ void ospf(void *arg)
 				sprintf(charid,"%d",node);
 				path.append(charid);
 
-				reverse(path.begin(),path.end());
 				cout<<it->first<<"             "<<djikstra_label[it->first].first<<"        "<<path<<endl;
 				r->outfile<<it->first<<"             "<<djikstra_label[it->first].first<<"        "<<path<<endl;
 			}
@@ -538,6 +534,7 @@ int main(int argc,char *argv[])
 		}
 		if( timeDiff(now,next_hello) >= 0)
 		{
+			
 			next_hello.tv_sec = next_hello.tv_sec + r->hello_int;
 			sendHello((void *)r);
 		}
