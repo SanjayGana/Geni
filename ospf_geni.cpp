@@ -220,7 +220,6 @@ void Router::processReceivedMsg()
 		{
 			string lsa_packet(recv_data);
 			bool forward = false;
-			int interface_id = getIDfromHost(inet_ntoa(client_addr.sin_addr));
 			int srcid = getNum32Bit( lsa_packet.substr(3,32) );				
 			int seq_num = getNum32Bit( lsa_packet.substr(35,32) );
 			if ( last_recv_LSA.count(srcid) == 0)
@@ -251,13 +250,10 @@ void Router::processReceivedMsg()
 
 				for( i = 0 ; i < neighbours.size() ; i++)
 				{
-					if ( interface_id != neighbours[i].j )
-					{
-						host = (struct hostent *) gethostbyname((char*)(getHostFromId(neighbours[i].j).c_str()));
-						server_addr.sin_addr = *((struct in_addr *) host->h_addr);
-						sendto(sock, recv_data , strlen(recv_data), 0,
-								(struct sockaddr *) &server_addr, sizeof (struct sockaddr));
-					}
+					host = (struct hostent *) gethostbyname((char*)(getHostFromId(neighbours[i].j).c_str()));
+					server_addr.sin_addr = *((struct in_addr *) host->h_addr);
+					sendto(sock, recv_data , strlen(recv_data), 0,
+							(struct sockaddr *) &server_addr, sizeof (struct sockaddr));
 				}
 
 			}
