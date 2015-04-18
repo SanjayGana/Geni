@@ -93,6 +93,16 @@ int getSrcId(char* hello)
 	return atoi(hello + 5);
 }
 
+string stringReverse(string s)
+{
+	string rev;
+	int i;
+	int l = s.length();
+	for(i = 0; i < l ; i++)
+	{
+		rev.push_back(s[l-i-1]);
+	}
+	return rev;
 /*
    * Class router which contains all necessary data stuctures to perform the functions required of a router
    */
@@ -119,7 +129,7 @@ class Router
 			id = 1;
 			hello_int = 1;
 			lsa_int = 5;
-			spf_int = 6;
+			spf_int = 20;
 		}
 
 		void constructNeighbours();
@@ -380,7 +390,7 @@ void ospf(void *arg)
 			distance.erase(last_added);
 	}
 
-
+	
 	cout<<"Routing Table for Node "<<r->id<<" at Time "<<Ntime<<endl;
 	r->outfile<<"Routing Table for Node "<<r->id<<" at Time "<<Ntime<<endl;
 
@@ -404,7 +414,7 @@ void ospf(void *arg)
 				}
 				sprintf(charid,"%d",node);
 				path.append(charid);
-
+				path = stringReverse(path);
 				cout<<it->first<<"             "<<djikstra_label[it->first].first<<"        "<<path<<endl;
 				r->outfile<<it->first<<"             "<<djikstra_label[it->first].first<<"        "<<path<<endl;
 			}
@@ -456,30 +466,30 @@ int main(int argc,char *argv[])
 		}
 		else if (strcmp(argv[i],"-h") == 0)
 		{
+			r->hello_int = atoi(argv[i+1]);
 			if(r->hello_int <= 0)
 			{
 				raise_error("Invalid interval for hello");
 		    	return 0;
 			}
-			r->hello_int = atoi(argv[i+1]);
 		}
 		else if (strcmp(argv[i],"-a") == 0)
 		{
+			r->lsa_int = atoi(argv[i+1]);
 			if(r->hello_int <= 0)
 			{
 				raise_error("Invalid interval for lsa");
 		    	return 0;
 			}
-			r->lsa_int = atoi(argv[i+1]);
 		}
 		else if (strcmp(argv[i],"-s") == 0)
 		{
+			r->spf_int = atoi(argv[i+1]);
 			if(r->hello_int <= 0)
 			{
 				raise_error("Invalid interval for spf");
 		    	return 0;
 			}
-			r->spf_int = atoi(argv[i+1]);
 		}
 		else
 		{
