@@ -521,9 +521,9 @@ int main(int argc,char *argv[])
 	struct timeval start,now;
 	struct timeval next_hello,next_lsa,next_ospf;
 	gettimeofday(&start,NULL);
-	next_hello.tv_sec = now.tv_sec + r->hello_int;
-	next_lsa.tv_sec = now.tv_sec + r->lsa_int;
-	next_ospf.tv_sec = now.tv_sec + r->spf_int;
+	next_hello.tv_sec = start.tv_sec + r->hello_int;
+	next_lsa.tv_sec = start.tv_sec + r->lsa_int;
+	next_ospf.tv_sec = start.tv_sec + r->spf_int;
 	while(true)
 	{
 		gettimeofday(&now,NULL);
@@ -535,17 +535,17 @@ int main(int argc,char *argv[])
 		if( timeDiff(now,next_hello) >= 0)
 		{
 			
-			next_hello.tv_sec = next_hello.tv_sec + r->hello_int;
+			next_hello.tv_sec = now.tv_sec + r->hello_int;
 			sendHello((void *)r);
 		}
 		if( timeDiff(now,next_lsa) >= 0)
 		{
-			next_lsa.tv_sec = next_lsa.tv_sec + r->lsa_int;
+			next_lsa.tv_sec = now.tv_sec + r->lsa_int;
 			sendLSA((void *)r);
 		}
 		if( timeDiff(now,next_ospf) >= 0)
 		{
-			next_ospf.tv_sec = next_ospf.tv_sec +  r->spf_int;
+			next_ospf.tv_sec = now.tv_sec +  r->spf_int;
 			ospf((void *)r);
 		}
 		r->processReceivedMsg();
