@@ -103,6 +103,8 @@ string stringReverse(string s)
 		rev.push_back(s[l-i-1]);
 	}
 	return rev;
+}
+
 /*
    * Class router which contains all necessary data stuctures to perform the functions required of a router
    */
