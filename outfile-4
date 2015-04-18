@@ -1,0 +1,112 @@
+Routing Table for Node 4 at Time 20
+Destination Cost       Path
+0             711        4-3-0
+1             651        4-3-1
+2             320        4-2
+3             212        4-3
+5             326        4-5
+6             304        4-6
+Routing Table for Node 4 at Time 40
+Destination Cost       Path
+0             881        4-3-0
+1             702        4-3-1
+2             396        4-2
+3             301        4-3
+5             380        4-5
+6             459        4-6
+Routing Table for Node 4 at Time 60
+Destination Cost       Path
+0             735        4-3-0
+1             725        4-2-1
+2             299        4-2
+3             346        4-3
+5             365        4-5
+6             470        4-6
+Routing Table for Node 4 at Time 80
+Destination Cost       Path
+0             635        4-3-0
+1             638        4-3-1
+2             289        4-2
+3             260        4-3
+5             238        4-5
+6             244        4-6
+Routing Table for Node 4 at Time 100
+Destination Cost       Path
+0             565        4-3-0
+1             502        4-2-1
+2             266        4-2
+3             187        4-3
+5             209        4-5
+6             239        4-6
+Routing Table for Node 4 at Time 120
+Destination Cost       Path
+0             742        4-3-0
+1             669        4-2-1
+2             433        4-2
+3             352        4-3
+5             362        4-5
+6             322        4-6
+Routing Table for Node 4 at Time 140
+Destination Cost       Path
+0             732        4-3-0
+1             676        4-3-1
+2             466        4-2
+3             289        4-3
+5             399        4-5
+6             406        4-6
+Routing Table for Node 4 at Time 160
+Destination Cost       Path
+0             742        4-3-0
+1             580        4-3-1
+2             368        4-2
+3             281        4-3
+5             479        4-5
+6             473        4-6
+Routing Table for Node 4 at Time 180
+Destination Cost       Path
+0             643        4-3-0
+1             590        4-3-1
+2             377        4-2
+3             317        4-3
+5             270        4-5
+6             432        4-6
+Routing Table for Node 4 at Time 200
+Destination Cost       Path
+0             592        4-3-0
+1             450        4-3-1
+2             270        4-2
+3             183        4-3
+5             289        4-5
+6             257        4-6
+Routing Table for Node 4 at Time 220
+Destination Cost       Path
+0             677        4-3-0
+1             628        4-3-1
+2             297        4-2
+3             281        4-3
+5             273        4-5
+6             336        4-6
+Routing Table for Node 4 at Time 240
+Destination Cost       Path
+0             663        4-3-0
+1             573        4-3-1
+2             319        4-2
+3             308        4-3
+5             304        4-5
+6             299        4-6
+Routing Table for Node 4 at Time 260
+Destination Cost       Path
+0             544        4-3-0
+1             565        4-3-1
+2             299        4-2
+3             232        4-3
+5             226        4-5
+6             310        4-6
+Routing Table for Node 4 at Time 280
+Destination Cost       Path
+0             733        4-3-0
+1             607        4-2-1
+2             296        4-2
+3             279        4-3
+5             273        4-5
+6             288        4-6
